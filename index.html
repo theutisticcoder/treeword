@@ -5,17 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Tree Word</title>
+     <style>
+        body { font-family: Arial, sans-serif; }
+        .article { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
+        .article h2 { margin-top: 0; }
+    </style>
 </head>
 <body>
+
+    <h1>Latest Climate Change News</h1>
+    <div id="news-container">
+        <p>Loading news...</p>
+    </div>
+
+    <script src="path/to/your/script.js"></script>
     <script>
-        // Replace 'YOUR_API_KEY' with your actual NewsData.io API key
 const apiKey = 'pub_ad48cee93ab741faae23de7367195598';
 const keyword = 'climate change';
 
-// Build the API URL with the keyword and your API key
 const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent(keyword)}`;
 
-// Select the HTML element where you want to display the news
 const newsContainer = document.getElementById('news-container');
 
 async function fetchNews() {
