@@ -10,8 +10,8 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // Your sensitive API credentials - store these securely, e.g., in environment variables
-const MORETREES_API_KEY = 'YOUR_API_KEY_HERE';
-const MORETREES_ACCOUNT_CODE = 'YOUR_ACCOUNT_CODE_HERE';
+const MORETREES_API_KEY = '4518d405-9872-47ce-934f-b02570227299';
+const MORETREES_ACCOUNT_CODE = '2m9ghk';
 
 // A simple API endpoint on your server to handle the tree-planting request
 app.post('/api/plant-tree', async (req, res) => {
