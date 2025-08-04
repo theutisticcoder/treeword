@@ -1,74 +1,63 @@
-// Import necessary modules
 const express = require('express');
-const fetch = require('node-fetch'); // You might need to install 'node-fetch'
-const bodyParser = require('body-parser');
-
 const app = express();
 const port = 3000;
 
-// Middleware to parse JSON body from incoming requests
-app.use(bodyParser.json());
+// Middleware to parse JSON bodies from incoming requests
+app.use(express.json());
 
-// Your sensitive API credentials - store these securely, e.g., in environment variables
-const MORETREES_API_KEY = '4518d405-9872-47ce-934f-b02570227299';
-const MORETREES_ACCOUNT_CODE = '2m9ghk';
+// Your sensitive API credentials - store these securely in environment variables
+const DIGITAL_HUMANI_API_KEY = 'DREj41ZyySBWCfY10kYmKyapiEaHLL4NOcR2ngbdMn25PHTP';
+const DIGITAL_HUMANI_ENTERPRISE_ID = 'a8e32048';
 
-// A simple API endpoint on your server to handle the tree-planting request
+// A secure endpoint on your server for the front end to call
 app.post('/api/plant-tree', async (req, res) => {
-    // You can get data from the request body, such as a customer's email
+    // Extract data from the request body
     const { customerEmail, quantity } = req.body;
 
-    // Validate that you have the required data
+    // Basic validation
     if (!customerEmail || !quantity || quantity <= 0) {
         return res.status(400).json({ error: 'Missing or invalid parameters.' });
     }
 
-    // The MoreTrees.eco API endpoint
-    const apiEndpoint = 'https://transaction-management-service.platform.moretrees.eco/transaction-management-api/external/plant';
+    // Digital Humani API endpoint for planting trees
+    const apiEndpoint = 'https://api.digitalhumani.com/tree';
 
-    // Construct the request body for the MoreTrees API
+    // Construct the request body for the Digital Humani API
     const requestBody = {
-        payment_account_code: MORETREES_ACCOUNT_CODE,
-        plant_for_others: true,
-        recipients: [
-            {
-                email: customerEmail,
-                name: 'Your Customer', // You can get this from your website's data
-                quantity: quantity
-            }
-        ]
+        enterpriseId: DIGITAL_HUMANI_ENTERPRISE_ID,
+        treeCount: quantity,
+        projectId: 1, // Use a specific project ID from Digital Humani
+        treeOwner: customerEmail
     };
 
     try {
-        // Make the POST request to the MoreTrees.eco API
+        // Make the secure POST request to the Digital Humani API
         const response = await fetch(apiEndpoint, {
             method: 'POST',
             headers: {
-                'X-API-KEY': MORETREES_API_KEY,
+                'X-Api-Key': DIGITAL_HUMANI_API_KEY,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(requestBody)
         });
 
-        // Parse the response from the MoreTrees.eco API
+        // Handle the response from the Digital Humani API
         const data = await response.json();
 
-        // Handle a successful response
         if (response.ok) {
-            console.log('Tree(s) successfully planted:', data);
-            return res.status(200).json({ message: 'Trees planted!', result: data });
+            console.log('Tree(s) planted successfully:', data);
+            return res.status(200).json({ message: 'Tree(s) planted!', result: data });
         } else {
-            // Handle an error response from the API
             console.error('Failed to plant tree(s):', data);
-            return res.status(response.status).json({ error: data.error });
+            return res.status(response.status).json({ error: data.error || 'Unknown error from Digital Humani API.' });
         }
     } catch (error) {
-        console.error('Error making API request:', error);
+        console.error('Error with API request:', error);
         return res.status(500).json({ error: 'Internal server error.' });
     }
 });
 
-// Start your server
+// Start the server
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
