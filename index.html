@@ -9,11 +9,17 @@
         body { font-family: Arial, sans-serif; }
         .article { border: 1px solid #ccc; padding: 15px; margin-bottom: 15px; border-radius: 5px; }
         .article h2 { margin-top: 0; }
+        button{
+            font-size: large;
+            color: white;
+            background: forestgreen;
+        }
     </style>
 </head>
 <body>
 
     <h1>Latest Climate Change News</h1>
+    <button id="planttrees" onclick="triggerTreePlanting()">Buy trees</button><br><br>
     <div id="news-container">
         <p>Loading news...</p>
     </div>
@@ -70,7 +76,38 @@ async function fetchNews() {
         newsContainer.innerHTML = `<p>Error fetching news: ${error.message}</p>`;
     }
 }
+ async function triggerTreePlanting() {
+            // Example data you would collect from a form or an e-commerce platform
+            const customerData = {
+                customerEmail: 'customer@example.com',
+                quantity: 1
+            };
 
+            try {
+                // Send a request to your own backend server
+                const response = await fetch('http://localhost:3000/api/plant-tree', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(customerData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    console.log('Backend response:', result.message);
+                    // You can update the page to show a success message
+                    document.body.innerHTML += '<p style="color: green;">Success! A tree has been planted.</p>';
+                } else {
+                    console.error('Backend error:', result.error);
+                    document.body.innerHTML += '<p style="color: red;">Error: Could not plant a tree.</p>';
+                }
+            } catch (error) {
+                console.error('Network error:', error);
+                document.body.innerHTML += '<p style="color: red;">Network Error: Could not connect to the server.</p>';
+            }
+        }
 // Call the function to fetch and display the news
 fetchNews();
     </script>
