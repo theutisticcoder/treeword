@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>TreeWord - Eco Friendly News</title>
+    <script src="https://cdn.jsdelivr.net/npm/gnews@1.0.3/index.min.js"></script>
     <style>
         body {
             font-family: Georgia, 'Times New Roman', Times, serif;
@@ -31,8 +32,8 @@
 </head>
 
 <body>
-<div>
-  <div style="
+    <div>
+        <div style="
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -45,12 +46,13 @@
   border-radius: 10px;
   font-family: SQ Market, SQ Market, Helvetica, Arial, sans-serif;
   ">
-  <div style="padding: 20px;">
-      <p style="
+            <div style="padding: 20px;">
+                <p style="
     font-size: 18px;
     line-height: 20px;
   ">Fund a Tree</p>
-    <a target="_blank" data-url="https://square.link/u/MA6mIK7i?src=embd" href="https://square.link/u/MA6mIK7i?src=embed" style="
+                <a target="_blank" data-url="https://square.link/u/MA6mIK7i?src=embd"
+                    href="https://square.link/u/MA6mIK7i?src=embed" style="
     display: inline-block;
     font-size: 18px;
     line-height: 48px;
@@ -62,101 +64,103 @@
     box-shadow: 0 0 0 1px rgba(0,0,0,.1) inset;
     border-radius: 6px;
   ">Donate</a>
-  </div>
-</div>
+            </div>
+        </div>
 
 
-  <script>
-    function showCheckoutWindow(e) {
-      e.preventDefault();
+        <script>
+            function showCheckoutWindow(e) {
+                e.preventDefault();
 
-      const url = document.getElementById('embedded-checkout-modal-checkout-button').getAttribute('data-url');
-      const title = 'Square Payment Links';
+                const url = document.getElementById('embedded-checkout-modal-checkout-button').getAttribute('data-url');
+                const title = 'Square Payment Links';
 
-      // Some platforms embed in an iframe, so we want to top window to calculate sizes correctly
-      const topWindow = window.top ? window.top : window;
+                // Some platforms embed in an iframe, so we want to top window to calculate sizes correctly
+                const topWindow = window.top ? window.top : window;
 
-      // Fixes dual-screen position                                Most browsers          Firefox
-      const dualScreenLeft = topWindow.screenLeft !==  undefined ? topWindow.screenLeft : topWindow.screenX;
-      const dualScreenTop = topWindow.screenTop !==  undefined   ? topWindow.screenTop  : topWindow.screenY;
+                // Fixes dual-screen position                                Most browsers          Firefox
+                const dualScreenLeft = topWindow.screenLeft !== undefined ? topWindow.screenLeft : topWindow.screenX;
+                const dualScreenTop = topWindow.screenTop !== undefined ? topWindow.screenTop : topWindow.screenY;
 
-      const width = topWindow.innerWidth ? topWindow.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
-      const height = topWindow.innerHeight ? topWindow.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+                const width = topWindow.innerWidth ? topWindow.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+                const height = topWindow.innerHeight ? topWindow.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
 
-      const h = height * .75;
-      const w = 500;
+                const h = height * .75;
+                const w = 500;
 
-      const systemZoom = width / topWindow.screen.availWidth;
-      const left = (width - w) / 2 / systemZoom + dualScreenLeft;
-      const top = (height - h) / 2 / systemZoom + dualScreenTop;
-      const newWindow = window.open(url, title, `scrollbars=yes, width=${w / systemZoom}, height=${h / systemZoom}, top=${top}, left=${left}`);
+                const systemZoom = width / topWindow.screen.availWidth;
+                const left = (width - w) / 2 / systemZoom + dualScreenLeft;
+                const top = (height - h) / 2 / systemZoom + dualScreenTop;
+                const newWindow = window.open(url, title, `scrollbars=yes, width=${w / systemZoom}, height=${h / systemZoom}, top=${top}, left=${left}`);
 
-      if (window.focus) newWindow.focus();
-    }
+                if (window.focus) newWindow.focus();
+            }
 
-    // This overrides the default checkout button click handler to show the embed modal
-    // instead of opening a new tab with the given link url
-    document.getElementById('embedded-checkout-modal-checkout-button').addEventListener('click', function (e) {
-      showCheckoutWindow(e);
-    });
-  </script>
-</div>
+            // This overrides the default checkout button click handler to show the embed modal
+            // instead of opening a new tab with the given link url
+            document.getElementById('embedded-checkout-modal-checkout-button').addEventListener('click', function (e) {
+                showCheckoutWindow(e);
+            });
+        </script>
+    </div>
     <style>
-        body { font-family: sans-serif; margin: 20px; }
-        .news-container { max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
-        .news-item { border-bottom: 1px solid #eee; padding: 15px 0; }
-        .news-item:last-child { border-bottom: none; }
-        .news-item h3 { margin: 0; font-size: 1.2em; }
-        .news-item a { text-decoration: none; color: #0066cc; }
-        .news-item a:hover { text-decoration: underline; }
-        .news-item p { margin-top: 5px; color: #666; font-size: 0.9em; }
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+
+        .news-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .news-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .news-item a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        .news-item a:hover {
+            text-decoration: underline;
+        }
+
+        .news-item p {
+            margin-top: 5px;
+            color: #666;
+            font-size: 0.9em;
+        }
     </style>
 
     <h1>Latest Treeword</h1>
-
-    <div id="news-container" class="news-container">
-        <p>Loading news...</p>
-    </div>
-
+    <div id="news"></div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const rssUrl = 'https://news.google.com/rss/search?q=climate%20change&hl=en-US&gl=US&ceid=US:en';
-            const newsContainer = document.getElementById('news-container');
+        const main = async () => {
+            const eco = await news.search('climate change');
 
-            fetch(rssUrl)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then(str => {
-                    const parser = new DOMParser();
-                    const xmlDoc = parser.parseFromString(str, 'text/xml');
-                    const items = xmlDoc.querySelectorAll('item');
+            for (let article of eco) {
+                console.log(article)
+                document.querySelector("#news").innerHTML += (article.pubDate + ' | ' + article.title);
+            }
+        };
 
-                    newsContainer.innerHTML = ''; // Clear the "Loading..." message
-
-                    items.forEach(item => {
-                        const title = item.querySelector('title').textContent;
-                        const link = item.querySelector('link').textContent;
-
-                        // Create HTML for each news item
-                        const newsItem = document.createElement('div');
-                        newsItem.className = 'news-item';
-                        newsItem.innerHTML = `
-                            <h3><a href="${link}" target="_blank">${title}</a></h3>
-                        `;
-                        newsContainer.appendChild(newsItem);
-                    });
-                })
-                .catch(error => {
-                    console.error('Error fetching the RSS feed:', error);
-                    newsContainer.innerHTML = '<p>Sorry, there was an error loading the news. Please try again later.</p>';
-                });
-        });
+        main();
     </script>
-
 
 </body>
 
